@@ -1,7 +1,7 @@
 import { ChangeEvent, createContext } from 'react';
 
-import { Hint } from '../../Hint/Hint';
-import { InputTextValidator, useInputText } from './hooks/useInputText';
+import { Hint } from '../../Hint';
+import { InputTextValidator, useInputText } from '../hooks';
 import { ValidationsOptions } from '../interfaces';
 
 export interface InputTextProps {

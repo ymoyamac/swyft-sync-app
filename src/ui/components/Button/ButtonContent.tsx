@@ -1,6 +1,6 @@
 import { ReactNode, useContext } from 'react';
 import { ButtonContext } from './Button';
-import { Spinner } from '../Spinner/Spinner';
+import { Spinner } from '../Spinner';
 
 interface ButtonContentProps {
     children?: ReactNode;

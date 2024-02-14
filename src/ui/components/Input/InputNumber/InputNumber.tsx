@@ -1,8 +1,7 @@
 import { ChangeEvent } from 'react';
-import { Hint } from '../../Hint/Hint';
-import { useInputValueLength } from '../InputText/hooks';
-import { useInputMode } from '../InputText/hooks/useInputMode';
+import { Hint } from '../../Hint';
 import { ValidationsOptions } from '../interfaces';
+import { useInputValueLength, useInputMode } from '../hooks';
 
 export interface InputNumberProps {
     name: string;
