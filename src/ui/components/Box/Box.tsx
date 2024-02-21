@@ -1,10 +1,5 @@
-import { ReactNode } from 'react';
+import { BoxProps } from "./interfaces";
 
-export interface BoxProps {
-    children?: ReactNode;
-    className?: string;
-    direcction?: string;
-}
 
 export function Box({ children, className, direcction }: BoxProps) {
     return (

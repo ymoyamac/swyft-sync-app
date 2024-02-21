@@ -1,13 +1,8 @@
 import { useContext } from 'react';
-import { InputTextContext } from '../Input/InputText/InputText';
-import { ValidationsOptions } from '../Input/interfaces';
 
-export interface HintProps {
-    className?: string;
-    type?: string;
-    msg?: string;
-    validations?: ValidationsOptions;
-}
+import { HintProps } from './interfaces';
+
+import { InputTextContext } from '../Input/InputText/InputText';
 
 export function Hint({ msg, validations }: HintProps) {
     const { isInvalid } = useContext(InputTextContext);    

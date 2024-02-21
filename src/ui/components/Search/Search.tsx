@@ -1,19 +1,15 @@
 import { FormEvent, useEffect, useState } from 'react';
 
+import { SearchForm, SearchProps } from './interfaces';
+
 import { Button } from '../Button';
 import { Form, useForm } from '../Form';
 import { InputText } from '../Input';
 
 import SearchIcon from '@mui/icons-material/Search';
-import { SearchForm } from './interfaces';
 import { ListBox } from '../List/ListBox/ListBox';
 import { List } from '../List/List/List';
 import { ListItem } from '../List/ListItem/ListItem';
-
-export interface SearchProps {
-    options?: string[];
-    defaultOptions?: string[];
-}
 
 export function Search({ options = [], defaultOptions }: SearchProps) {
     const initDefaultOptions = defaultOptions ?? options;

@@ -1,9 +1,5 @@
-import { ReactNode } from 'react';
 
-export interface TextProps {
-    children?: ReactNode;
-    className?: string;
-}
+import { TextProps } from './interfaces';
 
 export function Text({ children, className }: TextProps) {
     return (
