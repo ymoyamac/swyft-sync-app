@@ -2,14 +2,12 @@ import { FormEvent, useEffect, useState } from 'react';
 
 import { SearchForm, SearchProps } from './interfaces';
 
-import { Button } from '../Button';
 import { Form, useForm } from '../Form';
-import { InputText } from '../Input';
 
-import SearchIcon from '@mui/icons-material/Search';
 import { ListBox } from '../List/ListBox/ListBox';
 import { List } from '../List/List/List';
 import { ListItem } from '../List/ListItem/ListItem';
+import { InputSearch } from '../Input';
 
 export function Search({ options = [], defaultOptions }: SearchProps) {
     const initDefaultOptions = defaultOptions ?? options;
@@ -70,7 +68,7 @@ export function Search({ options = [], defaultOptions }: SearchProps) {
 
     return (
         <Form onSubmit={onSearchSubmit}>
-            <InputText
+            <InputSearch
                 className="w-full h-full"
                 name="search"
                 value={search}
@@ -78,14 +76,7 @@ export function Search({ options = [], defaultOptions }: SearchProps) {
                 onBlur={onBlur}
                 onFocus={onFocus}
                 placeholder="Search"
-            >
-                <Button
-                    className='bg-dark rounded-full p-2 hover:bg-secondaryDark/50 transition duration-700'
-                    type="submit"
-                >
-                    <SearchIcon className="text-white" />
-                </Button>
-            </InputText>
+            />
             {(isFocus && isBlank) ? (
                 <ListBox>
                     <List>
