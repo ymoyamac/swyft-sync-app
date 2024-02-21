@@ -1,5 +1,5 @@
 import { ReactNode, createContext } from 'react';
-import { Spinner } from '../Spinner/Spinner';
+import { Spinner } from '../Spinner';
 
 export interface ButtonsProps {
     children?: ReactNode;

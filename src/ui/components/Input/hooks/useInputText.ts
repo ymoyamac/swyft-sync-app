@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
-import { isEmail, notBlank, onlyLetters } from '../../../../../utils/inputValidators';
+import { isEmail, notBlank, onlyLetters } from '../../../../utils/inputValidators';
 
 export interface InputTextValidator {
     onlyLetters?: boolean;

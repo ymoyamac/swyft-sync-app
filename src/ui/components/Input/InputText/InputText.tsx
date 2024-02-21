@@ -1,10 +1,11 @@
-import { ChangeEvent, createContext } from 'react';
+import { ChangeEvent, FocusEvent, ReactNode, createContext } from 'react';
 
-import { Hint } from '../../Hint/Hint';
-import { InputTextValidator, useInputText } from './hooks/useInputText';
+import { Hint } from '../../Hint';
+import { InputTextValidator, useInputText } from '../hooks';
 import { ValidationsOptions } from '../interfaces';
 
 export interface InputTextProps {
+    children?: ReactNode;
     name: string;
     value: string;
     className?: string;
@@ -17,6 +18,8 @@ export interface InputTextProps {
     validations?: ValidationsOptions;
     directives?: string | string[];
     onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+    onFocus?: (event: FocusEvent<HTMLInputElement>) => void;
+    onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
 }
 
 export interface InputTextContextState {
@@ -32,7 +35,7 @@ export interface InputTextContextState {
 
 export const InputTextContext = createContext<InputTextContextState>({});
 
-export function InputText({ className, type, placeholder, id, name, label, disable, value, onChange, errorMessage, validations, directives }: InputTextProps) {
+export function InputText({ children, className, type, placeholder, id, name, label, disable, value, onChange, onFocus, onBlur, errorMessage, validations, directives }: InputTextProps) {
 
     const { isEmail, notBlank, onlyLetters, isInvalid } = useInputText({ value, type, directives });
     
@@ -43,18 +46,23 @@ export function InputText({ className, type, placeholder, id, name, label, disab
 
     return (
         <InputTextContext.Provider value={{isInvalid}}>
-            <div className="flex flex-col w-full">
+            <div className="flex flex-col w-full h-full">
                 {label && (<label className={`${hasErrors ? errorLabelClass : 'text-sm text-slate-300'}`}>{label}</label>)}
-                <input className={`${hasErrors ? errorClass : className} bg-transparent px-2 py-1 border rounded-md w-full text-lg text-slate-300 focus:outline-none focus:ring focus:border-blue-500`}
-                    type={type}
-                    placeholder={placeholder ?? ''}
-                    id={id}
-                    name={name}
-                    value={value}
-                    onChange={onChange}
-                    disabled={disable ?? false}
-                    autoComplete="off"
-                />
+                <div className="flex flex-row items-center relative p-2 w-full">
+                    <input className={`bg-transparent px-3 py-3 border rounded-md w-full text-lg text-slate-300 focus:outline-none focus:ring focus:border-blue-500 ${hasErrors ? errorClass : className} `}
+                        type={type}
+                        placeholder={placeholder ?? ''}
+                        id={id}
+                        name={name}
+                        value={value}
+                        onChange={onChange}
+                        onFocus={onFocus}
+                        onBlur={onBlur}
+                        disabled={disable ?? false}
+                        autoComplete="off"
+                    />
+                    <div className="absolute right-4">{children}</div>
+                </div>
                 <Hint msg={errorMessage} validations={validations}/>
             </div>
         </InputTextContext.Provider>
