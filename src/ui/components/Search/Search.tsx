@@ -6,9 +6,6 @@ import { InputText } from '../Input';
 
 import SearchIcon from '@mui/icons-material/Search';
 import { SearchForm } from './interfaces';
-import { ListBox } from '../List/ListBox/ListBox';
-import { List } from '../List/List/List';
-import { ListItem } from '../List/ListItem/ListItem';
 
 export interface SearchProps {
     options?: string[];
@@ -90,49 +87,6 @@ export function Search({ options = [], defaultOptions }: SearchProps) {
                     <SearchIcon className="text-white" />
                 </Button>
             </InputText>
-            {(isFocus && isBlank) ? (
-                <ListBox>
-                    <List>
-                        {standarOptions.map(option => (
-                            <ListItem
-                                key={option}
-                                onClick={() => onClick(option)}
-                            >
-                                {option}
-                            </ListItem>
-                        ))}
-                    </List>
-                </ListBox>
-            ) : (
-                (!isBlank) ? (
-                    <ListBox>
-                        <List>
-                            {(!isBlank) && (
-                                <ListItem
-                                    key={'searchValue'}
-                                    onClick={() => onClick(search)}
-                                >
-                                    {search}
-                                </ListItem>
-                            )}
-                            {filteredOptions.map(option => {
-                                if (option !== search) {
-                                    return (
-                                        <ListItem
-                                            key={option}
-                                            onClick={() => onClick(option)}
-                                        >
-                                            {option}
-                                        </ListItem>
-                                    );
-                                }
-                            })}
-                        </List>
-                    </ListBox>
-                ) : (
-                    <></>
-                )
-            )}
         </Form>
     );
 }
