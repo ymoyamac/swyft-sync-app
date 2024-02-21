@@ -1,16 +1,15 @@
 import { FormEvent, useEffect, useState } from 'react';
 
+import { SearchForm, SearchProps } from './interfaces';
+
 import { Button } from '../Button';
 import { Form, useForm } from '../Form';
 import { InputText } from '../Input';
 
 import SearchIcon from '@mui/icons-material/Search';
-import { SearchForm } from './interfaces';
-
-export interface SearchProps {
-    options?: string[];
-    defaultOptions?: string[];
-}
+import { ListBox } from '../List/ListBox/ListBox';
+import { List } from '../List/List/List';
+import { ListItem } from '../List/ListItem/ListItem';
 
 export function Search({ options = [], defaultOptions }: SearchProps) {
     const initDefaultOptions = defaultOptions ?? options;
@@ -87,6 +86,49 @@ export function Search({ options = [], defaultOptions }: SearchProps) {
                     <SearchIcon className="text-white" />
                 </Button>
             </InputText>
+            {(isFocus && isBlank) ? (
+                <ListBox>
+                    <List>
+                        {standarOptions.map(option => (
+                            <ListItem
+                                key={option}
+                                onClick={() => onClick(option)}
+                            >
+                                {option}
+                            </ListItem>
+                        ))}
+                    </List>
+                </ListBox>
+            ) : (
+                (!isBlank) ? (
+                    <ListBox>
+                        <List>
+                            {(!isBlank) && (
+                                <ListItem
+                                    key={'searchValue'}
+                                    onClick={() => onClick(search)}
+                                >
+                                    {search}
+                                </ListItem>
+                            )}
+                            {filteredOptions.map(option => {
+                                if (option !== search) {
+                                    return (
+                                        <ListItem
+                                            key={option}
+                                            onClick={() => onClick(option)}
+                                        >
+                                            {option}
+                                        </ListItem>
+                                    );
+                                }
+                            })}
+                        </List>
+                    </ListBox>
+                ) : (
+                    <></>
+                )
+            )}
         </Form>
     );
 }

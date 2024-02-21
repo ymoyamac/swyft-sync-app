@@ -1,10 +1,9 @@
 import { ChangeEvent, FocusEvent, ReactNode, createContext } from 'react';
-
-import { Hint } from '../../Hint';
-import { InputTextValidator, useInputText } from '../hooks';
 import { ValidationsOptions } from '../interfaces';
+import { InputTextValidator, useInputText } from '../hooks';
+import { Hint } from '../../Hint';
 
-export interface InputTextProps {
+export interface InputSearchProps {
     children?: ReactNode;
     name: string;
     value: string;
@@ -22,7 +21,7 @@ export interface InputTextProps {
     onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
 }
 
-export interface InputTextContextState {
+export interface InputSearchContextState {
     type?: string;
     value?: string;
     id?: string;
@@ -31,9 +30,9 @@ export interface InputTextContextState {
     validations?: ValidationsOptions;
 }
 
-export const InputTextContext = createContext<InputTextContextState>({});
+export const InputTextContext = createContext<InputSearchContextState>({});
 
-export function InputText({ children, className, type, placeholder, id, name, label, disable, value, onChange, onFocus, onBlur, errorMessage, validations, directives }: InputTextProps) {
+export function InputSearch({ children, className, type, placeholder, id, name, label, disable, value, onChange, onFocus, onBlur, errorMessage, validations, directives }: InputSearchProps) {
 
     const { isEmail, notBlank, onlyLetters, isInvalid } = useInputText({ value, type, directives });
     

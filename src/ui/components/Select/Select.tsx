@@ -1,9 +1,4 @@
-
-export interface SelectProps {
-    className?: string;
-    values?: string[];
-    defaultOption?: string;
-}
+import { SelectProps } from './interfaces';
 
 export function Select({ className, values, defaultOption = '' }: SelectProps) {
 
