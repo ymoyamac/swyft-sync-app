@@ -94,6 +94,7 @@ export function useForm<T>({ initialState, validationSchema = {} }: UseFormProps
         isRequired,
         isMin,
         isMax,
+        setFormData,
         fieldsRequired,
         validateRequiredFields,
         onChange,
