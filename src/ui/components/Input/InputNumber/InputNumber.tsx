@@ -1,20 +1,7 @@
 import { ChangeEvent } from 'react';
 import { Hint } from '../../Hint';
-import { ValidationsOptions } from '../interfaces';
+import { InputNumberProps } from '../interfaces';
 import { useInputValueLength, useInputMode } from '../hooks';
-
-export interface InputNumberProps {
-    name: string;
-    value: string;
-    id?: string;
-    className?: string;
-    label: string;
-    errorMessage?: string;
-    disable?: boolean;
-    maxLength?: number;
-    validations?: ValidationsOptions;
-    onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-}
 
 export function InputNumber({ className, label, maxLength, disable, id, name, value, onChange, errorMessage, validations }: InputNumberProps) {
 

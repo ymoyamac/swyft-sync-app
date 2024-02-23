@@ -1,8 +1,5 @@
 import { ChangeEvent } from 'react';
-
-export interface UseInputNumber {
-    maxLength?: number | string;
-}
+import { UseInputNumber } from '../interfaces';
 
 export function useInputValueLength({ maxLength = 100 }: UseInputNumber) {
 
