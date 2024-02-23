@@ -6,7 +6,7 @@ export const FormContext = createContext<FormContextState>({});
 export function Form({ children, className, onSubmit, initialState, validationSchema }: FormProps) {
     return (
         <FormContext.Provider value={{initialState, validationSchema}}>
-            <form className={`${className ?? 'flex flex-col items-center w-full'}`}
+            <form className={`flex flex-col items-center w-full ${className}`}
                 onSubmit={onSubmit}
             >
                 {children}

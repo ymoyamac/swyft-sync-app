@@ -1,4 +1,4 @@
-import { ChangeEvent, FocusEvent, ReactNode } from 'react';
+import { ChangeEvent, FocusEvent, KeyboardEvent, ReactNode } from 'react';
 
 export interface ValidationsOptions {
     isRequired?: boolean,
@@ -79,6 +79,7 @@ export interface InputSearchProps {
     onChange: (event: ChangeEvent<HTMLInputElement>) => void;
     onFocus?: (event: FocusEvent<HTMLInputElement>) => void;
     onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
+    onKeyDown?: <T>(event: KeyboardEvent<T>) => void;
 }
 
 export interface InputSearchContextState {

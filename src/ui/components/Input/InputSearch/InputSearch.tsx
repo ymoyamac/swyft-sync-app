@@ -8,13 +8,13 @@ import SearchIcon from '@mui/icons-material/Search';
 
 export const InputSearchContext = createContext<InputSearchContextState>({});
 
-export function InputSearch({ children, className, type, placeholder, id, name, label, disable, value, onChange, onFocus, onBlur }: InputSearchProps) {
+export function InputSearch({ className, type, placeholder, id, name, label, disable, value, onChange, onFocus, onBlur, onKeyDown }: InputSearchProps) {
 
     return (
         <InputSearchContext.Provider value={{}}>
-            <div className="flex flex-col w-full h-full">
+            <div className="flex flex-col w-full">
                 {label && (<label className={'text-sm text-slate-300'}>{label}</label>)}
-                <div className="flex flex-row items-center relative p-2 w-full">
+                <div className="flex flex-row items-center relative w-full">
                     <input className={`bg-transparent px-3 py-3 border rounded-md w-full text-lg text-slate-300 focus:outline-none focus:ring focus:border-blue-500 ${className} `}
                         type={type}
                         placeholder={placeholder ?? ''}
@@ -24,6 +24,7 @@ export function InputSearch({ children, className, type, placeholder, id, name, 
                         onChange={onChange}
                         onFocus={onFocus}
                         onBlur={onBlur}
+                        onKeyDown={onKeyDown}
                         disabled={disable ?? false}
                         autoComplete="off"
                     />
@@ -36,7 +37,6 @@ export function InputSearch({ children, className, type, placeholder, id, name, 
                         </Button>
                     </div>
                 </div>
-                {children}
             </div>
         </InputSearchContext.Provider>
     );

@@ -1,10 +1,9 @@
 import { Box } from './Box';
 import { Search } from './Search';
 
-
 export function PlayGround() {
 
-    const options = ['uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'quince', ' treinta y dos', 'unos soldados', 'uno punto y guion' ];
+    const options = ['uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'quince', ' treinta y dos', 'unos soldados', 'uno punto y guion', 'react', 'angular', 'golang' ];
     
 
     return (
