@@ -1,41 +1,13 @@
-import { ChangeEvent, FocusEvent, ReactNode, createContext } from 'react';
+import { createContext } from 'react';
+
+import { InputTextContextState, InputTextProps } from '../interfaces';
 
 import { Hint } from '../../Hint';
-import { InputTextValidator, useInputText } from '../hooks';
-import { ValidationsOptions } from '../interfaces';
-
-export interface InputTextProps {
-    children?: ReactNode;
-    name: string;
-    value: string;
-    className?: string;
-    id?: string;
-    type?: 'text' | 'email' | 'password';
-    placeholder?: string;
-    label?: string;
-    disable?: boolean;
-    errorMessage?: string;
-    validations?: ValidationsOptions;
-    directives?: string | string[];
-    onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-    onFocus?: (event: FocusEvent<HTMLInputElement>) => void;
-    onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
-}
-
-export interface InputTextContextState {
-    type?: string;
-    value?: string;
-    id?: string;
-    name?: string;
-    isInvalid?: InputTextValidator;
-    validations?: ValidationsOptions;
-}
-
-
+import { useInputText } from '../hooks';
 
 export const InputTextContext = createContext<InputTextContextState>({});
 
-export function InputText({ children, className, type, placeholder, id, name, label, disable, value, onChange, onFocus, onBlur, errorMessage, validations, directives }: InputTextProps) {
+export function InputText({ className, type, placeholder, id, name, label, disable, value, onChange, onFocus, onBlur, errorMessage, validations, directives }: InputTextProps) {
 
     const { isEmail, notBlank, onlyLetters, isInvalid } = useInputText({ value, type, directives });
     
@@ -61,7 +33,6 @@ export function InputText({ children, className, type, placeholder, id, name, la
                         disabled={disable ?? false}
                         autoComplete="off"
                     />
-                    <div className="absolute right-4">{children}</div>
                 </div>
                 <Hint msg={errorMessage} validations={validations}/>
             </div>

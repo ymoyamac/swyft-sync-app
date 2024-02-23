@@ -1,20 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
+
+import { InputTextValidator, ValidateParams } from '../interfaces';
+
 import { isEmail, notBlank, onlyLetters } from '../../../../utils/inputValidators';
-
-export interface InputTextValidator {
-    onlyLetters?: boolean;
-    isEmail?: boolean;
-    notBlank?: boolean;
-}
-
-export interface ValidateParams {
-    value?: string;
-    type?: 'text' | 'email' | 'password';
-    required?: boolean;
-    inputName?: string;
-    directives?: string | string[];
-}
 
 export function useInputText({ value, type, directives }: ValidateParams) {
 
