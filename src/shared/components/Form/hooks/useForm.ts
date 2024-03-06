@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { ChangeEvent, useEffect, useState } from 'react';
 import { FieldLength, ValidField, UseFormProps } from '../interfaces';
 
@@ -16,9 +17,6 @@ export function useForm<T>({ initialState, validationSchema = {} }: UseFormProps
         setIsRequired({...initialRequiredFields});
         setMin({...(getFields('minLength') as Record<string, number>)});
         setMax({...(getFields('maxLength') as Record<string, number>)});
-        console.log(initialRequiredFields);
-        
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const initialRequiredFields = Object.keys(validationSchema ?? {})
@@ -45,14 +43,11 @@ export function useForm<T>({ initialState, validationSchema = {} }: UseFormProps
     function validateRequiredFields() {
         let isFormValid = false;
         for (const key in isRequired) {
-            console.log(key, fieldsRequired[key]);
             
             setIsRequired(prevIsRequired => ({
                 ...prevIsRequired,
                 [key]: fieldsRequired[key] && formData[key as keyof T] === '',
             }));
-            console.log(isRequired);
-            
 
             if (fieldsRequired[key] && formData[key as keyof T] === '') {
                 isFormValid = true;
