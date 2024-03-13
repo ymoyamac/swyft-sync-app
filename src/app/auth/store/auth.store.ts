@@ -1,15 +1,20 @@
-import { create } from 'zustand'
-import { AuthResponse } from '../models'
+import { create } from 'zustand';
+import { AuthUser } from '../models';
+import { persist } from 'zustand/middleware';
+import { storeOptions } from './auth.persist';
 
-type State = {
-    authUser: AuthResponse | null;
+export type State = {
+    authUser: AuthUser;
 }
 
 type Action = {
-    setAuthUser: (authResponse: State['authUser']) => void
+    setAuthUser: (authUser: State['authUser']) => void;
 }
 
-export const useAuthStore = create<State & Action>((set) => ({
-    authUser: null,
-    setAuthUser: (authUser) => set(() => ({ authUser }))
-}));
+export const useAuthStore = create<State & Action, any>(persist(
+    (set) => ({
+        authUser: {},
+        setAuthUser: (authUser: AuthUser) => set(() => ({ authUser })),
+    }),
+    storeOptions
+));
