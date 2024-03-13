@@ -2,7 +2,7 @@ import { FormEvent, useContext, useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { useMutation } from 'react-query';
 
-import { AuthResponse, SignIn as SignInDto } from '../models';
+import { AuthUser, SignIn as SignInDto } from '../models';
 import { AuthContext } from '../../../routes/_auth';
 import { useAuthStore } from '../store/auth.store';
 import { useForm } from '../../../shared/components';
@@ -25,9 +25,8 @@ export function useSignIn<T extends SignInForm>({ initialState, validationSchema
 
     const navigate = useNavigate({ from: '/_auth/signin' });
     
-    const mutation = useMutation<AuthResponse | void, string, SignInDto, unknown>({
-        mutationKey: '/auth/signin',
-        mutationFn: ({ email, password }) => authService.signIn({ email, password }),
+    const mutation = useMutation('/auth/signin', {
+        mutationFn: ({ email, password }: SignInDto) => authService.signIn({ email, password }),
         retry: 0
     });
 
@@ -39,8 +38,8 @@ export function useSignIn<T extends SignInForm>({ initialState, validationSchema
         setIsLogin(true);
         const isFormValid = validateRequiredFields();
         if (!isFormValid) {
-            const authResponse = await mutation.mutateAsync({ email, password });
-            setAuthUser(authResponse as AuthResponse);     
+            const authUser = await mutation.mutateAsync({ email, password }) as AuthUser;
+            setAuthUser(authUser as AuthUser);
             navigate({ to: '/' });
             setIsLogin(false);
             return;

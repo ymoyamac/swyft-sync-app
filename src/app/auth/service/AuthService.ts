@@ -1,28 +1,24 @@
 import axios from 'axios';
-import { AuthResponse, SignIn } from '../models';
+import { AuthUser, SignIn } from '../models';
 
 class AuthService {
+
+    private readonly baseUrl: string = 'http://localhost:8080/auth';
+    
     constructor() {
         
     }
 
-    async signIn(signIn: SignIn): Promise<AuthResponse | void> {
-
-        try {
-            const res = await axios.post<AuthResponse>('http://localhost:8080/auth/sign-in', {
-                email: signIn.email,
-                password: signIn.password
-            }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*/*',
-                }
-            });
-    
-            return res.data;   
-        } catch (error) {
-            console.log(error);
-        }        
+    async signIn({ email, password }: SignIn): Promise<AuthUser> {
+        return await axios.post<AuthUser>(`${this.baseUrl}/sign-in`, {
+            email,
+            password
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*/*',
+            }
+        }).then(res => res.data);  
     }
 }
 

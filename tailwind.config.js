@@ -10,13 +10,15 @@ export default {
         "dark": "#181a1d",
         "secondary-dark": "#282b30",
         "low-dark": "#36393e",
-        "primary": "#0044d5",
-        "secondary": "#7289da",
+        "primary": "#7480ff",
+        "secondary": "#a0b0ff",
+        "tertiary": "#edf1ff",
+        "high-primary": "#1c184e",
         "primary-low": "#006aff",
         "white-low": "#efefef"
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 }
 
