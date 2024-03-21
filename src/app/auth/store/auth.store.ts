@@ -5,16 +5,20 @@ import { storeOptions } from './auth.persist';
 
 export type State = {
     authUser: AuthUser;
+    isAuthenticated: boolean;
 }
 
 type Action = {
-    setAuthUser: (authUser: State['authUser']) => void;
+    setAuthUser: (authUser: AuthUser) => void;
+    setIsAuthenticated: (isAuthenticated: boolean) => void;
 }
 
 export const useAuthStore = create<State & Action, any>(persist(
     (set) => ({
         authUser: {},
+        isAuthenticated: false,
         setAuthUser: (authUser: AuthUser) => set(() => ({ authUser })),
+        setIsAuthenticated: (isAuthenticated: boolean) => set(() => ({ isAuthenticated })),
     }),
     storeOptions
 ));

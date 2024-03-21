@@ -8,7 +8,7 @@ export const Route = createFileRoute('/_auth/signin')({
 function SignIn() {
 
     return (
-        <Box className="w-[360px] bg-secondary-dark px-5 py-7 rounded-md shadow-md flex flex-col gap-4">
+        <Box className="w-[360px] bg-dark px-5 py-7 rounded-md shadow-lg flex flex-col gap-4">
             <header className="flex flex-col justify-start items-start mb-2">
                 <h2 className="text-white text-4xl font-medium">
                     Sign <span className="text-primary">In</span>

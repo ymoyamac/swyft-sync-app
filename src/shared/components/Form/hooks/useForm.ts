@@ -32,7 +32,7 @@ export function useForm<T>({ initialState, validationSchema = {} }: UseFormProps
     }
           
 
-    function onChange({ target }: ChangeEvent<HTMLInputElement>) {
+    function onChange({ target }: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) {
         const { name, value } = target;
         setFormData({
             ...formData,
