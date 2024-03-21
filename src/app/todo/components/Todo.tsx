@@ -20,7 +20,7 @@ export function Todo({ title, description, isCompleted, isPinned }: SimpleTodo) 
     }
 
     return (
-        <div className="flex flex-row items-center justify-between bg-dark px-7 py-4 rounded-md">
+        <div className="flex flex-row items-center justify-between bg-dark hover:bg-low-dark hover:cursor-pointer px-7 py-4 rounded-md min-h-[96px] hover:shadow-lg">
             <div className="form-control">
                 <label className="label cursor-pointer gap-6">
                     <input
@@ -31,7 +31,7 @@ export function Todo({ title, description, isCompleted, isPinned }: SimpleTodo) 
                     />
                     <div className="flex flex-col gap-1 text-slate-400 ">
                         <span className={`label-text text-lg ${isTodoDone ? 'line-through' : ''}`}>{title}</span> 
-                        <span className={`label-text text-xs ${isTodoDone ? 'line-through' : ''}`}>{description}</span> 
+                        {description && <span className={`label-text text-xs ${isTodoDone ? 'line-through' : ''}`}>{description}</span>} 
                     </div>
                 </label>
             </div>

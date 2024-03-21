@@ -27,21 +27,25 @@ export function useSignIn<T extends SignInForm>({ initialState, validationSchema
     
     const mutation = useMutation('/auth/signin', {
         mutationFn: ({ email, password }: SignInDto) => authService.signIn({ email, password }),
-        retry: 0
+        retry: 0,
     });
 
     const setAuthUser = useAuthStore((state) => state.setAuthUser);
+    const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
 
     const { email, password, formData, isRequired, onChange, validateRequiredFields } = useForm<T>({ initialState, validationSchema });
 
     async function signIn() {
         setIsLogin(true);
-        const isFormValid = validateRequiredFields();
-        if (!isFormValid) {
+        const isFormInvalid = validateRequiredFields();
+        if (!isFormInvalid) {
             const authUser = await mutation.mutateAsync({ email, password }) as AuthUser;
-            setAuthUser(authUser as AuthUser);
-            navigate({ to: '/' });
-            setIsLogin(false);
+            if (!mutation.error) {
+                setAuthUser(authUser as AuthUser);
+                setIsAuthenticated(true);
+                navigate({ to: '/' });
+                setIsLogin(false);
+            }
             return;
         }
     }

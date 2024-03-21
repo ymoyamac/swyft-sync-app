@@ -1,7 +1,7 @@
 export interface Todo {
     todoId: string;
     title: string;
-    description: string;
+    description?: string;
     isCompleted: boolean;
     isActive: boolean;
     isPinned: boolean;

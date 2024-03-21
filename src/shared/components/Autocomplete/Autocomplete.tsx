@@ -8,7 +8,7 @@ import './style.css';
 import { useAutocomplete } from './hooks';
 import { Option } from '../Option';
 
-export function Autocomplete({ options = [] }: AutocompleteProps) {
+export function Autocomplete({ options = [], placeholder }: AutocompleteProps) {
 
     const {
         search,
@@ -36,7 +36,7 @@ export function Autocomplete({ options = [] }: AutocompleteProps) {
                 onBlur={onBlur}
                 onFocus={onFocus}
                 onKeyDown={onKeyDown}
-                placeholder="Search"
+                placeholder={placeholder ?? 'Search'}
             />
             {(isFocus) && (
                 <div

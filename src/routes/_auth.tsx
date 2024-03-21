@@ -18,7 +18,7 @@ export const Route = createFileRoute('/_auth')({
 function AuthLayout() {
     return (
         <AuthContext.Provider value={{ authService }}>
-            <Box className="flex flex-row items-center justify-center w-[70%] m-auto">
+            <Box className="flex flex-row items-center justify-center w-[70%] h-full m-auto">
                 <Outlet />
             </Box>
         </AuthContext.Provider>

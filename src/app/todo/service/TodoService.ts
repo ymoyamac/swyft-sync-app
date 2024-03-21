@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Todo } from '../models/Todo';
+import { CreateTodoDto } from '../models/CreateTodoDto';
 
 
 class TodoService {
@@ -17,6 +18,18 @@ class TodoService {
                 'Access-Control-Allow-Origin': '*/*',
                 'Authorization': `Bearer ${token}`
             },
+        })
+        .then(res => res.data);  
+    }
+
+    async createTodo(token: string, todo: CreateTodoDto): Promise<Todo> {
+        return await axios.post<Todo>(`${this.baseUrl}`, todo, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*/*',
+                'Authorization': `Bearer ${token}`
+            },
+            
         })
         .then(res => res.data);  
     }
