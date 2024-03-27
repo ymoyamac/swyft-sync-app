@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useContext, useEffect, useState } from 'react';
-import { Todo as SimpleTodo } from '../models';
+import { useEffect, useState } from 'react';
+import { Todo } from '../models';
 import { useForm } from '../../../shared/components';
-import { TodoPageContext } from '../components/TodoPage';
+import { useTodoStore } from '../store/todo.store';
 
 interface UseTodoListProps<T> {
     initialState: T,
@@ -11,9 +11,13 @@ interface UseTodoListProps<T> {
 
 export function useTodoList<T>({ initialState, key }: UseTodoListProps<T>) {
 
-    const { todos } = useContext(TodoPageContext);
+    const { todos } = useTodoStore(state => state);
     const { formData, onChange } = useForm({ initialState });
-    const [ searchTodos, setSearchTodos ] = useState<SimpleTodo[]>([]);
+    const [ searchTodos, setSearchTodos ] = useState<Todo[]>([]);
+
+    useEffect(() => {
+        setSearchTodos(todos);
+    }, [todos]);    
 
     useEffect(() => {
         setSearchTodos(
@@ -21,7 +25,7 @@ export function useTodoList<T>({ initialState, key }: UseTodoListProps<T>) {
                 todo => todo.title.trim()
                     .toLocaleLowerCase()
                     .includes((formData[key as keyof T] as string).trim().toLocaleLowerCase()) ||
-                todo.description.trim()
+                todo.description?.trim()
                     .toLocaleLowerCase()
                     .includes((formData[key as keyof T] as string).trim().toLocaleLowerCase())
             ) ?? []

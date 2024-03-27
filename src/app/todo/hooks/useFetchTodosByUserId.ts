@@ -10,9 +10,9 @@ interface Props {
 
 export function useFetchTodosByUserId({ todoService, authUser }: Props) {
     
-    const { data: todos = [], isLoading, isError, error } = useQuery<Todo[]>({
-        queryKey: ['todos'],
-        queryFn: async () => await todoService.getAllTodosByUserId(authUser?.token ?? ''),
+    const { data , isLoading, isError, error, isSuccess, refetch } = useQuery<Todo[]>({
+        queryKey: ['todos/user'],
+        queryFn: () => todoService.getAllTodosByUserId(authUser?.token ?? '', authUser.user?.userId ?? ''),
         refetchOnWindowFocus: false,
         staleTime: 1000 * 60 * 5,
     });
@@ -20,7 +20,9 @@ export function useFetchTodosByUserId({ todoService, authUser }: Props) {
     return {
         isError,
         isLoading,
+        isSuccess,
         error,
-        todos
+        data,
+        refetch
     };
 }

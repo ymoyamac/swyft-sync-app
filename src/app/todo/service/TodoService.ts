@@ -11,15 +11,13 @@ class TodoService {
         
     }
 
-    async getAllTodosByUserId(token: string): Promise<Todo[]> {
-        return await axios.get<Todo[]>(`${this.baseUrl}`, {
+    async getAllTodosByUserId(token: string, userId: string): Promise<Todo[]> {
+        return await axios.get<Todo[]>(`${this.baseUrl}/user/${userId}`, {
             headers: {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*/*',
                 'Authorization': `Bearer ${token}`
             },
-        })
-        .then(res => res.data);  
+        }).then(res => res.data);  
     }
 
     async createTodo(token: string, todo: CreateTodoDto): Promise<Todo> {
@@ -30,8 +28,7 @@ class TodoService {
                 'Authorization': `Bearer ${token}`
             },
             
-        })
-        .then(res => res.data);  
+        }).then(res => res.data);  
     }
 }
 

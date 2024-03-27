@@ -2,11 +2,11 @@
 import PushPinIcon from '@mui/icons-material/PushPin';
 import PushPinOutlinedIcon from '@mui/icons-material/PushPinOutlined';
 
-import { Todo as SimpleTodo } from "../models/Todo";
+import { Todo } from '../models/Todo';
 import { useState } from 'react';
 
 
-export function Todo({ title, description, isCompleted, isPinned }: SimpleTodo) {
+export function TodoItem({ title, description, isCompleted, isPinned }: Todo) {
 
     const [isTodoPinned, setIsTodoPinned] = useState(isPinned);
     const [isTodoDone, setIsTodoDone] = useState(isCompleted);

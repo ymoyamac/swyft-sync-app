@@ -6,6 +6,7 @@ import { useMutation } from 'react-query';
 import { CreateTodoDto } from '../models/CreateTodoDto';
 import { ValidationSchema } from '../../../shared/components/Form';
 import { useAuthStore } from '../../auth/store/auth.store';
+import { useTodoStore } from '../store/todo.store';
 
 const style = {
     position: 'absolute',
@@ -40,12 +41,17 @@ export function TodoModal({ isCreateTodo = true }: TodoModalProps) {
 
     const authUser = useAuthStore((state) => state.authUser);
 
-    const { open, setOpen, todoService } = useContext(TodoPageContext);
+    const { open, todoService, setOpen } = useContext(TodoPageContext);
     const { title, description, isRequired, onChange, validateRequiredFields } = useForm({ initialState, validationSchema });
+    const { todos, updateTodos } = useTodoStore(state => state);
+
 
     const mutation = useMutation('/todos', {
         mutationFn: async ({ title, description }: CreateTodoDto) => await todoService?.createTodo(authUser?.token ?? '', { title, description }),
-        retry: 0
+        retry: 0,
+        onSuccess: (todo) => {
+            updateTodos([...todos, todo!])
+        }
     });
 
     async function createNewTodo() {
@@ -70,6 +76,7 @@ export function TodoModal({ isCreateTodo = true }: TodoModalProps) {
     }
 
     function onCancel() {
+        setIsLoading(false);
         setOpen(false);
     }
 
